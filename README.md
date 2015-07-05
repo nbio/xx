@@ -23,7 +23,47 @@ Two things: `xml.StartElement` and `xml.CharData`. No processing instructions, c
 ## Usage
 
 ```go
-// Put something here
+type Part struct {
+	Name string
+}
+
+type Example struct {
+	Size    int
+	Enabled bool
+	Parts   []Part
+}
+
+s := NewScanner()
+s.MustHandleStartElement("example", func(ctx *Context) error {
+	v := ctx.Value.(*Example)
+	v.Size = ctx.AttrInt("", "size")
+	v.Enabled = ctx.AttrBool("", "enabled")
+	return nil
+})
+s.MustHandleStartElement("example>part", func(ctx *Context) error {
+	v := ctx.Value.(*Example)
+	v.Parts = append(v.Parts, Part{})
+	return nil
+})
+s.MustHandleCharData("example>part", func(ctx *Context) error {
+	v := ctx.Value.(*Example)
+	v.Parts[len(v.Parts)-1].Name = string(ctx.CharData)
+	return nil
+})
+
+x := `<?xml version="1.0" encoding="utf-8"?>
+<example size="1" enabled="true">
+	<part>Foo</part>
+	<part>Bar</part>
+	<part>Baz</part>
+</example>`
+
+d := xml.NewDecoder(bytes.NewBufferString(x))
+var v Example
+s.Scan(d, &v)
+fmt.Printf("Example size=%d enabled=%t parts=%s,%s,%s\n",
+	v.Size, v.Enabled, v.Parts[0].Name, v.Parts[1].Name, v.Parts[2].Name)
+// Output: Example size=1 enabled=true parts=Foo,Bar,Baz
 ```
 
 ## Author
