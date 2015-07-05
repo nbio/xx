@@ -14,16 +14,6 @@ func decoder(s string) *xml.Decoder {
 	return xml.NewDecoder(bytes.NewBufferString(s))
 }
 
-func debugStartElement(ctx *Context) error {
-	fmt.Printf("xml.StartElement: <%s xmlns=\"%s\">\n", ctx.StartElement.Name.Local, ctx.StartElement.Name.Space)
-	return nil
-}
-
-func debugCharData(ctx *Context) error {
-	fmt.Printf("xml.CharData: %s\n", string(ctx.CharData))
-	return nil
-}
-
 func TestScanner(t *testing.T) {
 	s := NewScanner()
 	s.MustHandleStartElement("epp", func(ctx *Context) error { return nil })
