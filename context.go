@@ -49,7 +49,7 @@ func (ctx *Context) path() string {
 	if ctx.Parent != nil {
 		p2 := ctx.Parent.path()
 		if p2 != "" {
-			p = p2 + " > " + p
+			p = p2 + ">" + p
 		}
 	}
 	return p
