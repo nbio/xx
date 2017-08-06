@@ -16,9 +16,19 @@ func decoder(s string) *xml.Decoder {
 
 func TestScanner(t *testing.T) {
 	s := NewScanner()
-	s.MustHandleStartElement("epp", func(ctx *Context) error { return nil })
-	s.MustHandleStartElement("epp>response>result", func(ctx *Context) error { return nil })
-	s.MustHandleCharData("epp>response>result>msg", func(ctx *Context) error { return nil })
+	s.MustHandleStartElement("epp", func(ctx *Context) error {
+		st.Reject(t, ctx.Parent, nil)
+		st.Expect(t, ctx.Parent.StartElement.Name, xml.Name{})
+		return nil
+	})
+	s.MustHandleStartElement("epp>response>result", func(ctx *Context) error {
+		st.Expect(t, ctx.path(), "epp>response>result")
+		return nil
+	})
+	s.MustHandleCharData("epp>response>result>msg", func(ctx *Context) error {
+		st.Expect(t, ctx.path(), "epp>response>result>msg")
+		return nil
+	})
 
 	x := `<?xml version="1.0" encoding="utf-8"?>
 <epp xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:ietf:params:xml:ns:epp-1.0 epp-1.0.xsd" xmlns="urn:ietf:params:xml:ns:epp-1.0">

@@ -128,7 +128,6 @@ func (s *Scanner) scan(ctx *Context) error {
 		}
 		switch node := t.(type) {
 		case xml.StartElement:
-			ctx.StartElement = node
 			s2, ok := s.tree[node.Name]
 			if !ok {
 				s2, ok = s.tree[xml.Name{"", node.Name.Local}]
@@ -137,13 +136,16 @@ func (s *Scanner) scan(ctx *Context) error {
 					break
 				}
 			}
+			child := *ctx
+			child.Parent = ctx
+			child.StartElement = node
 			if s2.se != nil {
-				err = s2.se(ctx)
+				err = s2.se(&child)
 				if err != nil {
 					return err
 				}
 			}
-			err = s2.scan(ctx)
+			err = s2.scan(&child)
 
 		case xml.EndElement:
 			return nil

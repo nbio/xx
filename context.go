@@ -11,6 +11,7 @@ type Context struct {
 	Value        interface{}
 	StartElement xml.StartElement
 	CharData     xml.CharData
+	Parent       *Context
 }
 
 // Attr returns the string value for the XML attributed named space:local.
@@ -40,4 +41,16 @@ func (ctx *Context) AttrInt(space, local string) int {
 	v := ctx.Attr(space, local)
 	n, _ := strconv.Atoi(v)
 	return n
+}
+
+// path returns a > delimited path for nested Context(s)
+func (ctx *Context) path() string {
+	p := ctx.StartElement.Name.Local
+	if ctx.Parent != nil {
+		p2 := ctx.Parent.path()
+		if p2 != "" {
+			p = p2 + ">" + p
+		}
+	}
+	return p
 }
