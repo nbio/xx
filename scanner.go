@@ -108,14 +108,15 @@ func (s *Scanner) makePath(path string) (*Scanner, error) {
 var ErrInvalidPath = errors.New("invalid scan path")
 
 // Scan reads xml.Tokens from Decoder d, passing matching
-// xml.StartElement and xml.CharData tokens to the matching
-// ScanFuncs in s. It returns any errors encountered.
+// xml.StartElement or xml.CharData tokens and an optional
+// value from the caller to the matching ScanFuncs in s.
+// It returns any errors encountered.
 // It will return if it encounters an xml.EndElement that matches
 // the corresponding xml.StartElement it attempted to scan.
-func (s *Scanner) Scan(d *xml.Decoder, v interface{}) error {
+func (s *Scanner) Scan(d *xml.Decoder, ctxValue interface{}) error {
 	ctx := Context{
 		Decoder: d,
-		Value:   v,
+		Value:   ctxValue,
 	}
 	return s.scan(&ctx)
 }
