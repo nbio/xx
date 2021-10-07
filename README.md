@@ -1,7 +1,7 @@
 # xx
 
-[![CircleCI](https://circleci.com/gh/nbio/xx.svg?style=svg)](https://circleci.com/gh/nbio/xx)
-[![godoc](http://img.shields.io/badge/docs-GoDoc-blue.svg)](https://godoc.org/github.com/nbio/xx)
+[![build status](https://img.shields.io/github/workflow/status/nbio/xx/Go.svg)](https://github.com/nbio/xx/actions)
+[![pkg.go.dev](https://img.shields.io/badge/docs-pkg.go.dev-blue.svg)](https://pkg.go.dev/github.com/nbio/xx)
 
 Minimal [SAX](https://en.wikipedia.org/wiki/Simple_API_for_XML)-ish XML scanner for [Go](https://golang./org). Extracted from and used in production at [domainr.com](https://domainr.com).
 
@@ -68,4 +68,4 @@ fmt.Printf("Example size=%d enabled=%t parts=%s,%s,%s\n",
 
 ## Author
 
-© 2015 nb.io, LLC
+© nb.io LLC

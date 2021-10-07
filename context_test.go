@@ -10,15 +10,15 @@ import (
 func TestContextAttr(t *testing.T) {
 	ctx := Context{
 		StartElement: xml.StartElement{
-			Name: xml.Name{"urn:ietf:params:xml:ns:epp-1.0", "example"},
+			Name: xml.Name{Space: "urn:ietf:params:xml:ns:epp-1.0", Local: "example"},
 			Attr: []xml.Attr{
-				{xml.Name{"urn:ietf:params:xml:ns:epp-1.0", "avail"}, "1"},
-				{xml.Name{"", "alpha"}, "TRUE"},
-				{xml.Name{"", "beta"}, "1"},
-				{xml.Name{"other", "gamma"}, "false"},
-				{xml.Name{"other", "delta"}, "FALSE"},
-				{xml.Name{"", "omega"}, "hammertime"},
-				{xml.Name{"", "number"}, "42"},
+				{Name: xml.Name{Space: "urn:ietf:params:xml:ns:epp-1.0", Local: "avail"}, Value: "1"},
+				{Name: xml.Name{Local: "alpha"}, Value: "TRUE"},
+				{Name: xml.Name{Local: "beta"}, Value: "1"},
+				{Name: xml.Name{Space: "other", Local: "gamma"}, Value: "false"},
+				{Name: xml.Name{Space: "other", Local: "delta"}, Value: "FALSE"},
+				{Name: xml.Name{Local: "omega"}, Value: "hammertime"},
+				{Name: xml.Name{Local: "number"}, Value: "42"},
 			},
 		},
 	}
