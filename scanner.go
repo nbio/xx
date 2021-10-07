@@ -131,7 +131,7 @@ func (s *Scanner) scan(ctx *Context) error {
 		case xml.StartElement:
 			s2, ok := s.tree[node.Name]
 			if !ok {
-				s2, ok = s.tree[xml.Name{"", node.Name.Local}]
+				s2, ok = s.tree[xml.Name{Space: "", Local: node.Name.Local}]
 				if !ok {
 					err = ctx.Decoder.Skip()
 					break
@@ -162,5 +162,4 @@ func (s *Scanner) scan(ctx *Context) error {
 			return err
 		}
 	}
-	return nil
 }
