@@ -2,10 +2,11 @@ package xx
 
 import (
 	"bytes"
-	"encoding/xml"
 	"fmt"
 	"io"
 	"testing"
+
+	"github.com/nbio/xml"
 
 	"github.com/nbio/st"
 )

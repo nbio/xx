@@ -1,8 +1,9 @@
 package xx
 
 import (
-	"encoding/xml"
 	"testing"
+
+	"github.com/nbio/xml"
 
 	"github.com/nbio/st"
 )

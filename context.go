@@ -1,8 +1,9 @@
 package xx
 
 import (
-	"encoding/xml"
 	"strconv"
+
+	"github.com/nbio/xml"
 )
 
 // Context holds XML scanning context.

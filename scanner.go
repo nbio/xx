@@ -1,9 +1,10 @@
 package xx
 
 import (
-	"encoding/xml"
 	"errors"
 	"strings"
+
+	"github.com/nbio/xml"
 )
 
 // ScanFunc is a callback that accepts an xml.StartElement, an
