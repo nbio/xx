@@ -1,6 +1,6 @@
 # xx
 
-[![build status](https://img.shields.io/github/workflow/status/nbio/xx/Go.svg)](https://github.com/nbio/xx/actions)
+[![build status](https://img.shields.io/github/actions/workflow/status/nbio/xx/go.yaml?branch=main)](https://github.com/nbio/xx/actions)
 [![pkg.go.dev](https://img.shields.io/badge/docs-pkg.go.dev-blue.svg)](https://pkg.go.dev/github.com/nbio/xx)
 
 Minimal [SAX](https://en.wikipedia.org/wiki/Simple_API_for_XML)-ish XML scanner for [Go](https://golang./org). Extracted from and used in production at [domainr.com](https://domainr.com).
